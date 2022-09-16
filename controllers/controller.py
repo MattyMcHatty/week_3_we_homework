@@ -12,7 +12,7 @@ def add_book():
     title = request.form['title']
     author = request.form['author']
     genre = request.form['genre']
-    new_book = Book(title=title, author=author, genre=genre)
+    new_book = Book(title=title, author=author, genre=genre, checked_out=False)
     add_new_book(new_book)
     return redirect('/books')
 
@@ -24,4 +24,11 @@ def individual_book(book_index):
 @app.route('/books/delete/<book_title>', methods=['POST'])
 def delete(book_title):
     delete_book(book_title)
+    return redirect('/books')
+
+@app.route('/books/<book_title>', methods=['POST'])
+def check_out_book(book_title):
+    return_date = request.form['date']
+    book_to_check_out = book_title
+    check_book_out(book_to_check_out, return_date)
     return redirect('/books')

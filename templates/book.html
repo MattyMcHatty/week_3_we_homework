@@ -2,6 +2,20 @@
 
 {% block content %}
 
-    {{book.title}}, {{book.author}}, {{book.genre}}<br>
+    {{book.title}}, {{book.author}}, {{book.genre}}
+
+    {% if book.checked_out %}
+
+        <br> To be returned by: {{book.return_by}}
+
+    {% else %}
+
+    <form class="form-inline" action="/books/{{book.title}}" method="POST">
+        <label for="date"></label>
+        <input type="date" name="date" id="date">
+        <input type="submit" value="Check-Out">
+    </form>
+
+    {% endif %}
 
 {% endblock %}

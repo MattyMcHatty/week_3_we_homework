@@ -4,6 +4,10 @@
     {% for book in book_list %}
 
     <a href="/books/{{book_list.index(book)}}">{{book.title}}, {{book.author}} </a>
+
+    {% if book.checked_out %}
+    - Checked Out - Return by {{book.return_by}}
+    {% endif %}
     
     <form class="form-inline" action="/books/delete/{{book.title}}" method="POST">
 
