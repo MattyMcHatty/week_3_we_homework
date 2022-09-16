@@ -19,16 +19,22 @@ def add_book():
 
 @app.route('/books/<book_index>')
 def individual_book(book_index):
-    return render_template('book.html', title='Individual Book', book=book_list[int(book_index)])
+    return render_template('book.html', title=book_list[int(book_index)].title, book=book_list[int(book_index)])
 
 @app.route('/books/delete/<book_title>', methods=['POST'])
 def delete(book_title):
     delete_book(book_title)
     return redirect('/books')
 
-@app.route('/books/<book_title>', methods=['POST'])
+@app.route('/books/checkout/<book_title>', methods=['POST'])
 def check_out_book(book_title):
     return_date = request.form['date']
     book_to_check_out = book_title
     check_book_out(book_to_check_out, return_date)
+    return redirect('/books')
+
+@app.route('/books/checkin/<book_title>', methods=['POST'])
+def check_in_book(book_title):
+    book_to_check_in = book_title
+    check_book_in(book_to_check_in)
     return redirect('/books')

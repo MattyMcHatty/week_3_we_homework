@@ -23,3 +23,9 @@ def check_book_out(book_to_check_out, date):
         if book.title == book_to_check_out:
             book.checked_out = True
             book.return_by = date
+
+def check_book_in(book_to_check_in):
+    for book in book_list:
+        if book.title == book_to_check_in:
+            book.checked_out = False
+            book.return_by = None
